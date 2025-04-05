@@ -63,7 +63,20 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new List<int>(); // Placeholder
+                HashSet<int> numSet = new HashSet<int>(nums);
+                List<int> missingNumbers = new List<int>();
+
+                if (nums == null || nums.Length == 0)
+                    return missingNumbers;
+
+                for (int i = 1; i <= nums.Length; i++)
+                {
+                    if (!numSet.Contains(i))
+                    {
+                        missingNumbers.Add(i);
+                    }
+                }
+                return missingNumbers;
             }
             catch (Exception)
             {
@@ -77,7 +90,25 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new int[0]; // Placeholder
+                List<int> evenList = new List<int>();
+                List<int> oddList = new List<int>();
+
+                if (nums == null || nums.Length <= 1)
+                    return nums;
+
+                foreach (int num in nums)
+                {
+                    if (num % 2 == 0)
+                    {
+                        evenList.Add(num);
+                    }
+                    else
+                    {
+                        oddList.Add(num);
+                    }
+                }
+                evenList.AddRange(oddList);
+                return evenList.ToArray();
             }
             catch (Exception)
             {
@@ -91,6 +122,24 @@ namespace Assignment_2
             try
             {
                 // Write your code here
+                Dictionary<int, int> numDict = new Dictionary<int, int>();
+
+                if (nums == null || nums.Length < 2)
+                    return Array.Empty<int>();
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int complement = target - nums[i];
+                    if (numDict.ContainsKey(complement))
+                    {
+                        return new int[] { numDict[complement], i };
+                    }
+                    if (!numDict.ContainsKey(nums[i]))
+                    {
+                        numDict[nums[i]] = i;
+                    }
+                }
+
                 return new int[0]; // Placeholder
             }
             catch (Exception)
@@ -105,7 +154,14 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                if (nums == null || nums.Length < 3)
+                    throw new ArgumentException("Input array must have at least 3 elements");
+
+                Array.Sort(nums);
+                int n = nums.Length;
+                int product1 = nums[n - 1] * nums[n - 2] * nums[n - 3];
+                int product2 = nums[0] * nums[1] * nums[n - 1];
+                return Math.Max(product1, product2);
             }
             catch (Exception)
             {
@@ -119,7 +175,19 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return "101010"; // Placeholder
+                if (decimalNumber == 0) return "0";
+
+                bool isNegative = decimalNumber < 0;
+                decimalNumber = Math.Abs(decimalNumber);
+
+                string binary = "";
+                while (decimalNumber > 0)
+                {
+                    binary = (decimalNumber % 2) + binary;
+                    decimalNumber /= 2;
+                }
+                return isNegative ? "-" + binary : binary; ;
+
             }
             catch (Exception)
             {
@@ -133,7 +201,26 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                if (nums == null || nums.Length == 0)
+                    throw new ArgumentException("Input array cannot be empty");
+                if (nums.Length == 1)
+                    return nums[0];
+
+                int left = 0, right = nums.Length - 1;
+                while (left < right)
+                {
+                    int mid = left + (right - left) / 2;
+                    if (nums[mid] > nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid;
+                    }
+                }
+                return nums[left];// Placeholder
+
             }
             catch (Exception)
             {
@@ -147,7 +234,17 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return false; // Placeholder
+                if (x < 0) return false;
+
+                int original = x, reversed = 0;
+                while (x > 0)
+                {
+                    int digit = x % 10;
+                    reversed = reversed * 10 + digit;
+                    x /= 10;
+                }
+                return original == reversed;
+
             }
             catch (Exception)
             {
@@ -161,7 +258,16 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                if (n <= 0) return 0;
+                if (n == 1) return 1;
+                int a = 0, b = 1, c = 0;
+                for (int i = 2; i <= n; i++)
+                {
+                    c = a + b;
+                    a = b;
+                    b = c;
+                }
+                return c;// Placeholder
             }
             catch (Exception)
             {
@@ -169,4 +275,5 @@ namespace Assignment_2
             }
         }
     }
+
 }
