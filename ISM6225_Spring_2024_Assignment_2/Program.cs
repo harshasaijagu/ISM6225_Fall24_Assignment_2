@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 
+using System.Collections.Generic;
+ 
 namespace Assignment_2
 {
     class Program
@@ -56,117 +57,451 @@ namespace Assignment_2
             int fibonacciNumber = Fibonacci(n);
             Console.WriteLine(fibonacciNumber);
         }
-
+ 
         // Question 1: Find Missing Numbers in Array
+
         public static IList<int> FindMissingNumbers(int[] nums)
-        {
-            try
-            {
-                // Write your code here
-                return new List<int>(); // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
+        {
+
+            //List to store missing numbers
+
+            List<int> missingnumbers = new List<int>();
+
+            //Input array to HashSet which stores only unique values
+            //Edge Case - Check if the input array is null
+            HashSet<int> numSet = new HashSet<int>(nums);
+
+            try
+
+            {
+
+                for (int i = 1; i <= nums.Length; i++)
+
+                {
+
+                    if (!numSet.Contains(i))
+
+                    {
+
+                        missingnumbers.Add(i);
+
+                    }
+
+                }
+ 
+                return missingnumbers; 
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+        }
+ 
         // Question 2: Sort Array by Parity
+        // Edge Case - Input array contains only odd or only even numbers.
         public static int[] SortArrayByParity(int[] nums)
-        {
-            try
-            {
-                // Write your code here
-                return new int[0]; // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
+        {
+
+            try
+
+            {
+
+                int odd = 0;
+
+                for(int i = 0; i < nums.Length; i++)
+
+                {
+
+                    if (nums[i] % 2 == 0)
+
+                    {
+
+                        int temp = nums[odd];
+
+                        nums[odd] = nums[i];
+
+                        nums[i] = temp;
+
+                        odd++;
+
+                    }
+
+                }
+
+                return nums; // Placeholder
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+        }
+ 
         // Question 3: Two Sum
+ 
         public static int[] TwoSum(int[] nums, int target)
-        {
-            try
-            {
-                // Write your code here
-                return new int[0]; // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
+        {
+
+            try
+
+            {
+
+                //Edge case -Check if the input array is null
+
+                if (nums == null)
+
+                {
+
+                    Console.WriteLine("Input array is null.");
+
+                    return new int[0];
+
+                }
+
+                //Edge case -Check if the input array is empty or has only one element
+
+                if ( nums.Length<2)
+
+                {
+
+                    Console.WriteLine("Input array is empty.");
+
+                    return new int[0];
+
+                }
+
+                for (int i=0;i<= nums.Length - 1; i++)
+
+                {
+
+                    for (int j = i + 1; j <= nums.Length - 1; j++)
+
+                    {
+
+                        if (nums[i] + nums[j] == target)
+
+                        {
+
+                            return new int[] { i, j };
+
+                        }
+
+                    }
+
+                }
+
+                return new int[] {}; // Placeholder
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+        }
+ 
         // Question 4: Find Maximum Product of Three Numbers
+        //// Edge Case - Input array has less than 3 elements 
         public static int MaximumProduct(int[] nums)
-        {
-            try
-            {
-                // Write your code here
-                return 0; // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
+        {
+
+            try
+
+            {
+
+                Array.Sort(nums);
+
+                int n = nums.Length;
+
+                // Calculate the maximum product of three numbers
+
+                int product1 = nums[n - 1] * nums[n - 2] * nums[n - 3];
+
+                int product2 = nums[0] * nums[1] * nums[n - 1];
+
+                // Compare the two products
+
+                // and return the maximum
+
+                int maxproduct = Math.Max(product1,product2);
+
+                return maxproduct; // Placeholder
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+        }
+ 
         // Question 5: Decimal to Binary Conversion
+        //// Edge Case- Input number is 0 (binary is "0")
         public static string DecimalToBinary(int decimalNumber)
-        {
-            try
-            {
-                // Write your code here
-                return "101010"; // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
+        {
+
+            try
+
+            {
+
+                //Edge case -Check if the input number is negative
+
+                if (decimalNumber < 0)
+
+                {
+
+                    Console.WriteLine("Input number is negative.");
+
+                    return "";
+
+                }
+
+                if (decimalNumber == 0)
+
+                {
+
+                    return "0";
+
+                }
+
+                // Initialize an empty string to store the binary representation
+
+                string binary = "";
+ 
+                while (decimalNumber > 0)
+
+                {
+
+                    int r = decimalNumber % 2;
+
+                    // Add the remainder to the binary string
+
+                    binary = r + binary;
+
+                    decimalNumber /= 2;
+
+                }      
+
+                return binary; 
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+        }
+ 
         // Question 6: Find Minimum in Rotated Sorted Array
+
         public static int FindMin(int[] nums)
-        {
-            try
-            {
-                // Write your code here
-                return 0; // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
+        {
+
+            try
+
+            {
+
+                // Edge Case 1: null array
+
+                if (nums == null)
+
+                {
+
+                    Console.WriteLine("Input array is null.");
+
+                    return int.MinValue;
+
+                }
+ 
+                
+ 
+                int left = 0;
+
+                int right = nums.Length - 1;
+ 
+                while (left < right)
+
+                {
+
+                    int mid = left + (right - left) / 2;
+ 
+                    if (nums[mid] > nums[right])
+
+                    {
+
+                        // Minimum is in the right half
+
+                        left = mid + 1;
+
+                    }
+
+                    else
+
+                    {
+
+                        // Minimum is at mid or in the left half
+
+                        right = mid;
+
+                    }
+
+                }
+ 
+                return nums[left];          
+
+            }
+
+            catch (Exception)
+
+            {
+
+                throw;
+
+            }
+
+        }
+ 
         // Question 7: Palindrome Number
-        public static bool IsPalindrome(int x)
-        {
-            try
-            {
-                // Write your code here
-                return false; // Placeholder
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
 
-        // Question 8: Fibonacci Number
-        public static int Fibonacci(int n)
+        public static bool IsPalindrome(int x)
+
         {
+
+            int temp = 0;
+
+            int result = 0;
+
+            int target = x;
+
             try
+
             {
-                // Write your code here
-                return 0; // Placeholder
+
+                //Edge case -Check if the input number is negative
+
+                if (x < 0)
+
+                    return false;
+
+                //Edge case -Check if the input number is less than 10. Single digit numbers are palindromes
+
+                if (x>=0 && x<10)
+
+                    return true;
+
+                while (x > 0)
+
+                {
+
+                    temp = x % 10;
+
+                    result = result*10 + temp;
+
+                    x = x / 10;
+
+                }
+
+                return result == target;
+ 
             }
+
             catch (Exception)
+
             {
+
                 throw;
+
             }
+
         }
+ 
+        // Question 8: Fibonacci Number
+
+        public static int Fibonacci(int n)
+
+{
+
+    //Edge case: Check valid range
+
+    if (n < 0 || n>30)
+
+    {
+
+        Console.WriteLine("Input out of valid range (0 to 30)");
+
+        return -1;
+
+    }
+
+    // Edge case: Check if the input number is 0 or 1
+
+    if (n == 0) return 0;
+
+    if (n == 1) return 1;
+ 
+    int a = 0;
+
+    int b = 1;
+
+    int temp = 0;
+
+    try
+
+    {
+
+        for(int i = 2; i <=n; i++)
+
+        {
+
+            temp = a+b;
+
+            a = b;
+
+            b = temp;
+
+        }
+ 
+        return b; 
+
+    }
+
+    catch (Exception)
+
+    {
+
+        throw;
+
+    }
+
+}
     }
 }
