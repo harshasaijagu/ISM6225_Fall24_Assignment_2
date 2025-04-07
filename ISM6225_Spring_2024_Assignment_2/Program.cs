@@ -34,7 +34,7 @@ namespace Assignment_2
 
             // Question 5: Decimal to Binary Conversion
             Console.WriteLine("Question 5:");
-            int decimalNumber = 42;
+            int decimalNumber = 56;
             string binary = DecimalToBinary(decimalNumber);
             Console.WriteLine(binary);
 
@@ -63,7 +63,19 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new List<int>(); // Placeholder
+                Array.Sort(nums);
+                List<int> missingNumbers = new List<int>();
+                int n = nums.Length;
+
+                for (int i = 1; i < n; i++)
+                {
+                    if (Array.IndexOf(nums, i) == -1)
+                    {
+                        missingNumbers.Add(i);
+                    }
+                }
+
+                return missingNumbers; // Placeholder
             }
             catch (Exception)
             {
@@ -77,7 +89,24 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return new int[0]; // Placeholder
+                int[] result = new int[nums.Length];
+                int left = 0;
+                int right = nums.Length - 1;
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    if (nums[i] % 2 == 0)
+                    {
+                        result[left++] = nums[i];
+                    }
+                    else
+                    {
+                        result[right--] = nums[i];
+                    }
+                }
+
+                return result; // Placeholder
+
             }
             catch (Exception)
             {
@@ -86,12 +115,32 @@ namespace Assignment_2
         }
 
         // Question 3: Two Sum
+
+        // The edge cases of this problem were negative numbers, an empty array, and an array with one element.
+        // I used a dictionary to efficiently find a complement without using the same index twice.
         public static int[] TwoSum(int[] nums, int target)
         {
             try
             {
                 // Write your code here
-                return new int[0]; // Placeholder
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int complement = target - nums[i];
+                    if (dict.ContainsKey(complement))
+                    {
+                        return new int[] { dict[complement], i };
+                    }
+
+                    if (!dict.ContainsKey(nums[i]))
+                    {
+                        dict[nums[i]] = i;
+                    }
+                }
+
+                return Array.Empty<int>();
+
             }
             catch (Exception)
             {
@@ -105,7 +154,13 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                Array.Sort(nums);
+
+                int product1 = nums[0] * nums[1] * nums[nums.Length - 1];
+                int product2 = nums[nums.Length - 1] * nums[nums.Length - 2] * nums[nums.Length - 3];
+
+                return Math.Max(product1, product2);
+
             }
             catch (Exception)
             {
@@ -119,7 +174,19 @@ namespace Assignment_2
             try
             {
                 // Write your code here
-                return "101010"; // Placeholder
+                if (decimalNumber == 0)
+                {
+                    return "0";
+                }
+
+                string binary = "";
+                while (decimalNumber > 0)
+                {
+                    binary = (decimalNumber % 2) + binary;
+                    decimalNumber /= 2;
+                }
+
+                return binary; // Placeholder
             }
             catch (Exception)
             {
@@ -128,12 +195,32 @@ namespace Assignment_2
         }
 
         // Question 6: Find Minimum in Rotated Sorted Array
+
+        // The edge cases of this problem were empty array and array with one element, an array with no rotation, and an array where all elements are the same.
+        // I used binary search to find the minimum element in the rotated sorted array, which naturally handles the edge cases.
         public static int FindMin(int[] nums)
         {
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                int left = 0;
+                int right = nums.Length - 1;
+
+                while (left < right)
+                {
+                    int mid = left + (right - left) / 2;
+
+                    if (nums[mid] > nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid;
+                    }
+                }
+
+                return nums[left]; // Placeholder
             }
             catch (Exception)
             {
@@ -142,12 +229,30 @@ namespace Assignment_2
         }
 
         // Question 7: Palindrome Number
+
+        // The edge cases of this problem were negative numbers, numbers ending in zeros, and single-digit numbers.
+        // I ruled out negative numbers and numbers ending in zeros as they cannot be palindromes, while reversing digits to compare against the original number.
         public static bool IsPalindrome(int x)
         {
             try
             {
                 // Write your code here
-                return false; // Placeholder
+                if (x < 0)
+                {
+                    return false;
+                }
+
+                int original = x;
+                int reversed = 0;
+
+                while (x > 0)
+                {
+                    int digit = x % 10;
+                    reversed = reversed * 10 + digit;
+                    x /= 10;
+                }
+
+                return original == reversed;
             }
             catch (Exception)
             {
@@ -156,12 +261,28 @@ namespace Assignment_2
         }
 
         // Question 8: Fibonacci Number
+
+        // The edge cases of this problem were negative numbers, a large number n, zero, and one.
+        // I returned 0 for n = 0 and 1 for n = 1, while using an iterative approach to calculate Fibonacci numbers for larger n.
         public static int Fibonacci(int n)
         {
             try
             {
                 // Write your code here
-                return 0; // Placeholder
+                if (n <= 1)
+                {
+                    return n;
+                }
+
+                int prev1 = 0, prev2 = 1;
+                for (int i = 2; i <= n; i++)
+                {
+                    int temp = prev1 + prev2;
+                    prev1 = prev2;
+                    prev2 = temp;
+                }
+
+                return prev2;
             }
             catch (Exception)
             {
